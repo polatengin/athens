@@ -17,6 +17,8 @@ app.use(cors(corsOptions));
 
 const server = createServer(app);
 
+const connections: { socket: Socket, clientId: string }[] = [];
+
 app.get("/", (request, response) => {
   response.send("Hello World!..");
 });
