@@ -16,6 +16,9 @@ app.use(cors(corsOptions));
 
 const server = createServer(app);
 
+app.get("/", (request, response) => {
+  response.send("Hello World!..");
+});
 server.listen(4000, () => {
   console.log("it's started listening...");
 });
