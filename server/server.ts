@@ -8,3 +8,6 @@ app.use(cors(corsOptions));
 
 const server = createServer(app);
 
+server.listen(4000, () => {
+  console.log("it's started listening...");
+});
