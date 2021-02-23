@@ -22,6 +22,10 @@ export const App = () => {
     <div className="App">
       APP
       <hr />
+      <button onClick={() => {
+        fetch("/api/websocket/broadcast", { method: "POST" }).then(response => response.json().then(json => console.log(json)));
+      }}>Broadcast</button>
+      <hr />
       { message }
     </div>
   );
