@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useWebHook } from "./useWebHook";
 
@@ -8,13 +8,8 @@ export const App = () => {
 
   const [ message, setMessage ] = useState("");
 
-  fetch("/api/websocket/", {
-    "method": "GET"
-  }).then(response => {
-    response.text().then(text => {
-      setMessage(text);
-    });
-  });
+  useEffect(() => {
+  }, []);
 
   return (
     <div className="App">
