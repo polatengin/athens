@@ -6,6 +6,8 @@ export const App = () => {
 
   const socket = useWebHook();
 
+  console.log("socket_id", socket.id);
+
   const [ message, setMessage ] = useState("");
 
   useEffect(() => {
