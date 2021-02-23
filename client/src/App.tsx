@@ -8,7 +8,7 @@ export const App = () => {
 
   const [ message, setMessage ] = useState("");
 
-  fetch("http://localhost:4000/", {
+  fetch("/api/websocket", {
     "method": "GET"
   }).then(response => {
     response.text().then(text => {
