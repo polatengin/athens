@@ -6,24 +6,24 @@ export const App = () => {
 
   const socket = useWebHook();
 
-  console.log("socket_id", socket.id);
-
-  // client -> server
-  socket.on("broadcast", (data: object) => {
-    console.log(data);
-  });
-
   const [ message, setMessage ] = useState("");
 
   useEffect(() => {
-  }, []);
+
+    console.log("socket_id", socket.id);
+
+    socket.on("broadcast", (data: object) => {
+      console.log("broadcast received from socket", data);
+    });
+
+  }, [ socket ]);
 
   return (
     <div className="App">
       APP
       <hr />
       <button onClick={() => {
-        fetch("/api/websocket/broadcast", { method: "POST" }).then(response => response.json().then(json => console.log(json)));
+        fetch("/api/websocket/broadcast", { method: "POST" }).then(response => response.json().then(json => console.log("json", json)));
       }}>Broadcast</button>
       <hr />
       { message }
