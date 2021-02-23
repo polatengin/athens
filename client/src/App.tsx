@@ -8,6 +8,11 @@ export const App = () => {
 
   console.log("socket_id", socket.id);
 
+  // client -> server
+  socket.on("broadcast", (data: object) => {
+    console.log(data);
+  });
+
   const [ message, setMessage ] = useState("");
 
   useEffect(() => {
