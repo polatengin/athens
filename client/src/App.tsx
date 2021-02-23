@@ -8,7 +8,7 @@ export const App = () => {
 
   const [ message, setMessage ] = useState("");
 
-  fetch("/api/websocket", {
+  fetch("/api/websocket/", {
     "method": "GET"
   }).then(response => {
     response.text().then(text => {
