@@ -29,6 +29,11 @@ const io = new Server(server, {
     credentials: true
   }
 });
+
+io.on("connection", (socket: Socket) => {
+  console.log(`client ${socket.id} connected...`);
+});
+
 server.listen(4000, () => {
   console.log("it's started listening...");
 });
