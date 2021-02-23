@@ -7,6 +7,7 @@
     "build": "rm -rf ./dist && tsc",
     "start": "pm2 start ./dist/server.js",
     "stop": "pm2 kill",
+    "dev": "npm run stop && npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
