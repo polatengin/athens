@@ -22,7 +22,7 @@ app.get("/", (request, response) => {
 });
 
 const io = new Server(server, {
-  path: "/api/websocket/socket.io",
+  path: "/socket.io",
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
