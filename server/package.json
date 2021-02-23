@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "rm -rf ./dist && tsc",
   },
   "keywords": [],
   "author": "",
