@@ -31,7 +31,7 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket: Socket) => {
-  console.log(`client ${socket.id} connected...`);
+  console.log(`client ${socket.id} connected @ ${new Date()}...`);
 });
 
 server.listen(4000, () => {
