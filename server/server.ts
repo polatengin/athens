@@ -23,6 +23,14 @@ app.get("/", (request, response) => {
   response.send("Hello World!..");
 });
 
+app.post("/broadcast", (request, response) => {
+  connections.forEach(connection => {
+    connection.socket.emit("broadcast", { date: new Date(), random: Math.random() });
+  });
+
+  response.send("OK");
+});
+
 const io = new Server(server, {
   path: "/socket.io",
   cors: {
