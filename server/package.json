@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
+    "start": "pm2 start ./dist/server.js",
   },
   "keywords": [],
   "author": "",
