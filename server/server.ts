@@ -28,7 +28,7 @@ app.post("/broadcast", (request, response) => {
     connection.socket.emit("broadcast", { date: new Date(), random: Math.random() });
   });
 
-  response.send("OK");
+  response.json({ success: true });
 });
 
 const io = new Server(server, {
