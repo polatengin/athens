@@ -1,7 +1,13 @@
-FROM node:15.9-alpine3.13
+FROM node:14-alpine
 
-WORKDIR /app
+WORKDIR /src
 
-COPY . .
+COPY package.json /src
 
-ENTRYPOINT [ "npm", "run", "start" ]
+RUN npm install --production
+
+COPY . /src
+
+EXPOSE 4000
+
+CMD [ "npm", "run", "start" ]
