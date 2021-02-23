@@ -4,9 +4,7 @@ WORKDIR /src
 
 COPY package.json /src
 
-RUN npm install typescript --global
-
-RUN npm install --production
+RUN npm install
 
 COPY . /src
 
