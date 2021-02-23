@@ -1,0 +1,49 @@
+name: ci_client
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "client/**"
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: azure cli login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: deploy new version
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        run: |
+          cd client/
+
+          PROJECT_NAME="athens"
+          LOCATION="northeurope"
+
+          echo "Setting Azure Kubernetes Service Credentials..."
+
+          az aks get-credentials --name "${PROJECT_NAME}-aks" --resource-group "${PROJECT_NAME}-rg" --output none
+
+          echo "...done"
+
+          echo "Publishing..."
+
+          TAG="v$(date '+%Y%m%d%H%M%S')"
+
+          ACR_URL=`az acr show --name "${PROJECT_NAME}acr" --resource-group "${PROJECT_NAME}-rg" --query "loginServer" --output tsv`
+
+          IMAGE="${PWD##*/}:${TAG}"
+
+          az acr build -t "${PROJECT_NAME}/${IMAGE}" --registry "${PROJECT_NAME}acr" -f "./Dockerfile" .
+
+          cat ./deploy.yml | sed s/"{IMAGE}"/"${ACR_URL}\/${PROJECT_NAME}\/${IMAGE}"/g | kubectl apply -f -
+
+          echo "...done"
