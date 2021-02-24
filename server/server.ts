@@ -40,6 +40,11 @@ const io = new Server(server, {
   }
 });
 
+io.sockets.on("connection", (socket: Socket) => {
+
+  console.log(`${socket.id} connected!`);
+});
+
 io.on("connection", (socket: Socket) => {
   connections.push(socket);
   console.log(`client ${socket.id} connected @ ${new Date()}...`);
