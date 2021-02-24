@@ -41,7 +41,7 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket: Socket) => {
-  connections.push({ socket: socket, clientId: socket.id });
+  connections.push(socket);
   console.log(`client ${socket.id} connected @ ${new Date()}...`);
 });
 
