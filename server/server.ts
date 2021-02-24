@@ -43,6 +43,14 @@ const io = new Server(server, {
 io.sockets.on("connection", (socket: Socket) => {
 
   console.log(`${socket.id} connected!`);
+
+  socket.on("disconnect", () => {
+    console.log(`${socket.id} disconnected!`);
+
+    var index = connections.indexOf(socket);
+    connections.splice(index, 1);
+ });
+
 });
 
 io.on("connection", (socket: Socket) => {
