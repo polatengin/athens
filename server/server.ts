@@ -25,7 +25,7 @@ app.get("/", (request, response) => {
 
 app.post("/broadcast", (request, response) => {
   connections.forEach(connection => {
-    connection.socket.emit("broadcast", { date: new Date(), random: Math.random() });
+    connection.emit("broadcast", { date: new Date(), random: Math.random() });
   });
 
   response.json({ success: true });
