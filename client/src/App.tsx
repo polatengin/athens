@@ -10,8 +10,6 @@ export const App = () => {
 
   useEffect(() => {
 
-    console.log("socket_id", socket.id);
-
     socket.on("broadcast", (data: object) => {
       console.log("broadcast received from socket", data);
     });
