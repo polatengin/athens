@@ -42,7 +42,8 @@ const io = new Server(server, {
 
 io.sockets.on("connection", (socket: Socket) => {
 
-  console.log(`${socket.id} connected!`);
+  console.log(`client with id: "${socket.id}" connected!`);
+  connections.push(socket);
 
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected!`);
@@ -51,11 +52,6 @@ io.sockets.on("connection", (socket: Socket) => {
     connections.splice(index, 1);
  });
 
-});
-
-io.on("connection", (socket: Socket) => {
-  connections.push(socket);
-  console.log(`client ${socket.id} connected @ ${new Date()}...`);
 });
 
 server.listen(4000, () => {
