@@ -20,7 +20,7 @@ const server = createServer(app);
 const connections: Socket[] = [];
 
 app.get("/", (request, response) => {
-  response.send("Hello World!..");
+  response.send(`There are ${connections.length} client connected to server...`);
 });
 
 app.post("/broadcast", (request, response) => {
