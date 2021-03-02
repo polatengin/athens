@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { useWebHook } from "./useWebHook";
+import { useWebSocketHook } from "./useWebSocketHook";
 
 export const App = () => {
 
-  const socket = useWebHook();
+  const socket = useWebSocketHook();
 
   const [ message, setMessage ] = useState("");
 
