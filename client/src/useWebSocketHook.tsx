@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const useWebHook = () => {
+export const useWebSocketHook = () => {
 
   const socket = io({
     path: "/api/websocket/socket.io"
