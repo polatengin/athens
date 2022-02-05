@@ -8,9 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "# Contributors\n\nShout out to our top contributors!" > "CONTRIBUTORS.md"
+          echo <<EOF > CONTRIBUTORS.md
+          # Contributors
 
-          gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login'
+          Shout out to our top contributors!
+
+          EOF
+
+          echo gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login' >> CONTRIBUTORS.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit changes
