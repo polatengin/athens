@@ -7,6 +7,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: |
           REPO=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository')
 
@@ -24,3 +25,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(GITHUB) }}
+      - name: Commit changes
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: 'CONTRIBUTORS.md'
+          commit-msg: Update Contributors
+          github-token: ${{ secrets.GITHUB_TOKEN }}
