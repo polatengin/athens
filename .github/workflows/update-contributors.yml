@@ -11,7 +11,7 @@ jobs:
           echo "${GITHUB_CONTEXT}"
           echo "${GITHUB_CONTEXT}" | jq '.repository'
           echo "${GITHUB_CONTEXT}" | jq -r '.repository'
-          REPO=$(echo "${GITHUB_CONTEXT}") | jq -r '.repository'
+          REPO=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository')
 
           echo "repo"
           echo ${REPO}
