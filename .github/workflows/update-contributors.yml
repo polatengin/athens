@@ -13,6 +13,8 @@ jobs:
       - run: |
           REPO=$(echo "${GITHUB_CONTEXT}") | jq -r '.repository'
 
+          echo ${REPO}
+
           echo -e "# Contributors\n\n" > CONTRIBUTORS.md
 
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
