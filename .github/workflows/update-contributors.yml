@@ -15,12 +15,10 @@ jobs:
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
           gh api "repos/${REPO}/contributors" --jq '[map(select(.login | endswith("[bot]") | not)) | .[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
+
+          git add .
+          git commit -m "updating CONTRIBUTORS.md"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(GITHUB) }}
-      - name: Commit changes
-        uses: test-room-7/action-update-file@v1
-        with:
-          file-path: 'CONTRIBUTORS.md'
-          commit-msg: Update Contributors
-          github-token: ${{ secrets.GITHUB_TOKEN }}
