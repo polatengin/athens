@@ -10,6 +10,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           REPO=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository')
+          OWNER_ALIAS=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository_owner')
+          git config --global user.name "${OWNER_ALIAS}"
 
           echo -e "# Contributors\n\n" > CONTRIBUTORS.md
 
