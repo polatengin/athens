@@ -9,16 +9,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          # Setup variables
           REPO=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository')
           OWNER_ALIAS=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository_owner')
+
+          # Configure git to display correct user in the commit history
           git config --global user.name "${OWNER_ALIAS}"
 
+          # Starting changing the content of the CONTRIBUTORS.md
           echo -e "# Contributors\n\n" > CONTRIBUTORS.md
-
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
+          # Getting all time contributors list from GitHub api
+          # Remove bot accounts from the list (the ones with `[bot]` at the end of their names
+          # Convert them into Markdown list items (format: `- [_NAME_](_URL_)`)
+          # Append them to the CONTRIBUTORS.md
           gh api "repos/${REPO}/contributors" --jq '[map(select(.login | endswith("[bot]") | not)) | .[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
 
+          # If there is a change (means more contributors from last time
+          # Commit back the changes to the repo, with a commit message
           if [[ `git status --porcelain` ]]; then
             git add CONTRIBUTORS.md
             git commit -m "updating CONTRIBUTORS.md"
