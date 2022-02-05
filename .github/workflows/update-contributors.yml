@@ -27,9 +27,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(GITHUB) }}
-      - name: Commit changes
-        uses: test-room-7/action-update-file@v1
-        with:
-          file-path: 'CONTRIBUTORS.md'
-          commit-msg: Update Contributors
-          github-token: ${{ secrets.GITHUB_TOKEN }}
