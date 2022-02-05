@@ -16,6 +16,8 @@ jobs:
 
           gh api "repos/${REPO}/contributors" --jq '[map(select(.login | endswith("[bot]") | not)) | .[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
 
+          ls
+
           git add .
           git commit -m "updating CONTRIBUTORS.md"
           git push
