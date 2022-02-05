@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo "${GITHUB_CONTEXT}"
+          echo "${GITHUB_CONTEXT}" | jq '.repository'
+          echo "${GITHUB_CONTEXT}" | jq -r '.repository'
           REPO=$(echo "${GITHUB_CONTEXT}") | jq -r '.repository'
 
           echo "repo"
