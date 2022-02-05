@@ -15,7 +15,7 @@ jobs:
 
           EOF
 
-          echo gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login' >> CONTRIBUTORS.md
+          echo $(gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login') >> CONTRIBUTORS.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit changes
