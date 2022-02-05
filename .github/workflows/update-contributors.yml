@@ -8,12 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo <<EOF > CONTRIBUTORS.md
-          # Contributors
+          echo -e "# Contributors\n\n" > CONTRIBUTORS.md
 
-          Shout out to our top contributors!
-
-          EOF
+          echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
           echo $(gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login') >> CONTRIBUTORS.md
         env:
