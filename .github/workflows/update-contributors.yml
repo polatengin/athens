@@ -8,22 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "${GITHUB_CONTEXT}"
-          echo "${GITHUB_CONTEXT}" | jq '.repository'
-          echo "${GITHUB_CONTEXT}" | jq -r '.repository'
           REPO=$(echo "${GITHUB_CONTEXT}" | jq -r '.repository')
-
-          echo "repo"
-          echo ${REPO}
-          echo "repo"
-          echo "repos/${REPO}/contributors"
-          echo "repo"
 
           echo -e "# Contributors\n\n" > CONTRIBUTORS.md
 
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
-          gh api "repos/${REPO}/contributors" --jq '[.[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
+          gh api "repos/${REPO}/contributors" --jq '[map(select(.login | endswith("[bot]") | not)) | .[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(GITHUB) }}
