@@ -11,13 +11,15 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
       - run: |
-          REPO=${GITHUB_CONTEXT} | jq -r '.repository'
+          REPO="${GITHUB_CONTEXT} | jq -r '.repository'"
+
+          echo ${REPO}
 
           echo -e "# Contributors\n\n" > CONTRIBUTORS.md
 
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
-          gh api repos/${REPO}/contributors --jq '[.[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
+          gh api "repos/${REPO}/contributors" --jq '[.[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq -r '.[].login' | while read key; do echo -e "$key\n" >> CONTRIBUTORS.md; done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(GITHUB) }}
