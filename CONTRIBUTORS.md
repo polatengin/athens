@@ -1,1 +1,2 @@
-# Contributors\n\nShout out to our top contributors!
+
+gh api repos/polatengin/athens/contributors --jq map(select(.login | endswith("[bot]") | not)) | .[].login
