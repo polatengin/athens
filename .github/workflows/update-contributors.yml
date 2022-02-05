@@ -12,7 +12,7 @@ jobs:
 
           echo -e "Shout out to our top contributors!\n\n" >> CONTRIBUTORS.md
 
-          echo $(gh api repos/polatengin/athens/contributors --jq 'map(select(.login | endswith("[bot]") | not)) | .[].login') >> CONTRIBUTORS.md
+          echo $(gh api repos/polatengin/athens/contributors --jq '[.[] | .login = "- [@" + .login + "](https://github.com/" + .login + ")"]' | jq '.[].login') >> CONTRIBUTORS.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit changes
