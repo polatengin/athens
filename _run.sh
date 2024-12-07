@@ -25,3 +25,5 @@ kubectl apply -f ./iac/ingress.yaml
 sed "s/{IMAGE}/${ACR_SERVER}\/server:${TIMESTAMP}/g" ./server/deploy.yml | kubectl apply -f -
 
 sed "s/{IMAGE}/${ACR_SERVER}\/client:${TIMESTAMP}/g" ./client/deploy.yml | kubectl apply -f -
+
+echo "http://$(kubectl get ingress -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}")"
