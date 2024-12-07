@@ -23,3 +23,5 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 kubectl apply -f ./iac/ingress.yaml
 
 sed "s/{IMAGE}/${ACR_SERVER}\/server:${TIMESTAMP}/g" ./server/deploy.yml | kubectl apply -f -
+
+sed "s/{IMAGE}/${ACR_SERVER}\/client:${TIMESTAMP}/g" ./client/deploy.yml | kubectl apply -f -
