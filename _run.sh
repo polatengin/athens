@@ -8,8 +8,10 @@ az acr create --resource-group "rg-${PROJECT_SUFFIX}" --name "acr${PROJECT_SUFFI
 
 az aks create --resource-group "rg-${PROJECT_SUFFIX}" --name "aks-${PROJECT_SUFFIX}" --node-vm-size "Standard_D4_v5" --node-count "1" --attach-acr "acr${PROJECT_SUFFIX}" --generate-ssh-keys
 
-az acr login --name "acr${PROJECT_SUFFIX}"
-
 az acr build --registry "acr${PROJECT_SUFFIX}" --image "server:${TIMESTAMP}" ./server
 
 az acr build --registry "acr${PROJECT_SUFFIX}" --image "client:${TIMESTAMP}" ./client
+
+ACR_SERVER=$(az acr show --name "acr${PROJECT_SUFFIX}" --query "loginServer" --output "tsv")
+
+az acr login --name "acr${PROJECT_SUFFIX}"
