@@ -21,3 +21,5 @@ az aks get-credentials --resource-group "rg${PROJECT_SUFFIX}" --name "aks${PROJE
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 
 kubectl apply -f ./iac/ingress.yaml
+
+sed "s/{IMAGE}/${ACR_SERVER}\/server:${TIMESTAMP}/g" ./server/deploy.yml | kubectl apply -f -
