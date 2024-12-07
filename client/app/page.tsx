@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useWebSocketHook } from "./useWebSocketHook";
+import { useWebSocketHook } from "../useWebSocketHook";
 
 export default function Home() {
 
