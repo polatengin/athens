@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import { useWebSocketHook } from "./useWebSocketHook";
 
-export const App = () => {
+export default function Home() {
 
   const socket = useWebSocketHook();
 
-  const [ message, setMessage ] = useState("");
+  const [ message ] = useState("");
 
   useEffect(() => {
-
     socket.on("broadcast", (data: object) => {
       console.log("broadcast received from socket", data);
     });
-
   }, [ socket ]);
 
   return (
@@ -27,4 +25,4 @@ export const App = () => {
       { message }
     </div>
   );
-};
+}
