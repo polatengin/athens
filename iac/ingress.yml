@@ -12,14 +12,14 @@ spec:
   - http:
       paths:
       - path: /api/websocket/(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: server-service
             port:
               number: 80
       - path: /(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: client-service
