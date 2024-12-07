@@ -1,7 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polatengin/athens"
+  },
   "main": "server.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
