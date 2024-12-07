@@ -17,3 +17,6 @@ ACR_SERVER=$(az acr show --name "acr${PROJECT_SUFFIX}" --query "loginServer" --o
 az acr login --name "acr${PROJECT_SUFFIX}"
 
 az aks get-credentials --resource-group "rg${PROJECT_SUFFIX}" --name "aks${PROJECT_SUFFIX}"
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
