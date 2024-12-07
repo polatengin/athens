@@ -15,3 +15,5 @@ az acr build --registry "acr${PROJECT_SUFFIX}" --image "client:${TIMESTAMP}" ./c
 ACR_SERVER=$(az acr show --name "acr${PROJECT_SUFFIX}" --query "loginServer" --output "tsv")
 
 az acr login --name "acr${PROJECT_SUFFIX}"
+
+az aks get-credentials --resource-group "rg${PROJECT_SUFFIX}" --name "aks${PROJECT_SUFFIX}"
