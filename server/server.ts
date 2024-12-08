@@ -48,7 +48,8 @@ io.sockets.on("connection", (socket: Socket) => {
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected!`);
 
-    var index = connections.indexOf(socket);
+    const index = connections.indexOf(socket);
+
     connections.splice(index, 1);
  });
 
