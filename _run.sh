@@ -32,3 +32,6 @@ echo ""
 echo ""
 
 echo "Open ./mobile/App.js and change the socketEndpoint variable to the above IP address"
+
+echo "Run the following command to start the mobile project:"
+echo "cd ./mobile && npm install && npm run web"
