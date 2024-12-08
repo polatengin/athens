@@ -30,3 +30,5 @@ echo "Server Ip:"
 echo "http://$(kubectl get ingress -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}")"
 echo ""
 echo ""
+
+echo "Open ./mobile/App.js and change the socketEndpoint variable to the above IP address"
